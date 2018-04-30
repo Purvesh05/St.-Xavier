@@ -1,0 +1,16 @@
+{
+  "name": "school",
+  "version": "1.0.0",
+  "description": "St Xaiver website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "@ELIT",
+  "license": "ISC",
+  "dependencies": {
+  "bootstrap": "^3.7.1",
+  "font-awesome": "^5.0.0",
+  "jquery": "^3.3.1"
+	}
+}
