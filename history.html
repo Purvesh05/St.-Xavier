@@ -35,36 +35,41 @@
 <body>
     
     <!-- navbar-->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <ul class="nav navbar-nav">
-      <li><a href="index.html">Home</a></li>
-      <li class="dropdown active"><a class="dropdown-toggle" data-toggle="dropdown" href="#">about us<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li class="active"><a href="#">History</a></li>
-          <li><a href="vision.html">Vision & Mission</a></li>
-          <li><a href="#">Trustees</a></li>
-          <li><a href="#">About Principal</a></li>
-          <li><a href="#">Infrastructure</a></li>
-          <li><a href="#">Photo Gallery</a></li>
-          <li><a href="calendar.html">Academic Calendar</a></li>
-        </ul>
-      </li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Admissions<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">option 1</a></li>
-          <li><a href="#">option 2</a></li>
-          <li><a href="#">option 3</a></li>
-        </ul>
-      </li>
-      <li><a href="#">Page 2</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="/pages/signup.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-    </ul>
-  </div>
-    </nav>
+<div class="navbar navbar-expand-sm navbar-dark bg-dark" role="navigation">
+	<a class="navbar-brand" href="index.html">Home</a>
+	<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#myNavbar">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="myNavbar">
+		<ul class="navbar-nav">
+			<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" >about us<span class="caret"></span></a>
+				<ul class="dropdown-menu" >
+					<li class="nav-item"><a href="history.html" class="nav-item dropdown-item">History</a></li>
+					<li class="nav-item"><a href="vision.html" class="nav-item dropdown-item">Vision & Mission</a></li>
+					<li class="nav-item"><a href="#" class="nav-item dropdown-item">Trustees</a></li>
+					<li class="nav-item"><a href="#" class="nav-item dropdown-item">About Principal</a></li>
+					<li class="nav-item"><a href="#" class="nav-item dropdown-item">Infrastructure</a></li>
+					<li class="nav-item"><a href="#" class="nav-item dropdown-item">Photo Gallery</a></li>
+					<li class="nav-item"><a href="calendar.html" class="nav-item dropdown-item"> Academic Calendar</a></li>
+				</ul>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Admissions<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li class="nav-item"><a href="#" class="nav-item dropdown-item">option 1</a></li>
+						<li class="nav-item"><a href="#" class="nav-item dropdown-item">option 2</a></li>
+						<li class="nav-item"><a href="#" class="nav-item dropdown-item">option 3</a></li>
+					</ul>
+			</li>
+			<li class="nav-item"><a class="nav-link" href="#">page2</a></li>
+		</ul>
+		<ul class="navbar-nav  ml-auto">
+				<li class="nav-item"><a class="nav-link  mr-3" href="/pages/signup.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+				<li class="nav-item"><a class="nav-link" href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>	
+		</ul>
+	</div>
+	</div>
     
     <!-- history-->
     <br>
