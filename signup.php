@@ -1,6 +1,5 @@
 <?php
 
-include("includes/function.php");
 
 $db['db_host']="localhost";
 $db['db_user']="root";
@@ -9,43 +8,34 @@ $db['db_name']="school";
  
 foreach($db as $key => $value){
 	define(strtoupper($key),$value);
+	
 }
+
+
 $conn = mysqli_connect(DB_HOST,DB_USER,DB_PASS,DB_NAME);
+
+
+
+include("includes/function.php");
 
 if(isset($_POST['sign_up'])){
 
 $firstname = $_POST['firstname'];
 $lastname = $_POST['lastname'];
-$roll_no = $_POST['roll_no'];
 $email = $_POST['email'];
-$user_role = "user";
+$roll_no = $_POST['roll_no'];	
+$user_role = $_POST['user_role'];
 $password = $_POST['password'];
-
 $firstname = string_check($firstname);
 $lastname  = string_check($lastname);
-$roll_no = string_check($roll_no);
 $email = string_check($email);
+$roll_no = string_check($roll_no);	
+$user_role = string_check($user_role);
 $password = string_check($password);
 
-	$sql = "select user_password from users";
-$select_user_query = mysqli_query($conn,$sql);
-if(!$select_user_query){
-	die("There is some problem in server come back later");
-	
-}
-	while($row = mysqli_fetch_array($select_user_query)){
-		$db_user_password = $row['user_password'];
-		$password = crypt($password,$db_user_password);
-		if($password == $db_user_password){
-			echo "pass aleready in use";
-		}
-	}
-	
-/*$password = password_hash($password,PASSWORD_BCRYPT,array('cost'=>10));	*/
-	
+$password = password_hash($password,PASSWORD_BCRYPT,array('cost'=>10));	
 
-	
-$query = "insert into users(user_firstname,user_lastname,roll_no,user_email,user_role,user_password) values('$firstname','$lastname','$roll_no','$email','$user_role','$password')";
+$query = "insert into users(user_firstname,user_lastname,user_email,roll_no,user_role,user_password) values('$firstname','$lastname','$email','$roll_no','$user_role','$password')";
 $create_user_query = mysqli_query($conn,$query);
 if($create_user_query){
 	header("Location: signup.php");
@@ -80,12 +70,10 @@ else{
 	
 </head>
 <body>
-<?php
-	
-	
-?>
-           
-<section class="text-center">
+<div class="container" >
+	<div class="row ">
+
+<section >
     <h1>Sign Up</h1>
     
     <p>Sign up to stay up-to-date </p>
@@ -110,9 +98,10 @@ else{
 		</div>
 		
 		<div class="form-group">
-		<select name="user_role" id="user_role" class="form-control user_role">
+		<select name="user_role" id="user_role" class="form-control">
 			<option value="default" readonly>Select a option</option>
 			<option value="student">Student</option>
+			<option value="teacher">teacher</option>
 			<option value="user">Others</option>
 
 		</select>
@@ -120,9 +109,8 @@ else{
 		
 		<div class="form-group " id="roll_no" >
 			<label for="roll_no">Roll No.</label>
-			<input type="text" name="roll_no" class="form-control roll_no" required>
+			<input type="text" name="roll_no" id="Roll_no" class="form-control roll_no" required>
 		</div>
-		
 
 		<div class="form-group">
 			<label for="user_password">Password</label>
@@ -135,10 +123,12 @@ else{
 			
 		</div>
 		
-			
+			<!--<div class="hide invisible">
+            	 Password length should be greater than 8
+			</div>-->
    
    		<div class="form-group">
-   		
+   			<!-- <button name="sign_up" class="btn btn-primary disabled" type="button">Disabled Button</button>-->
 			<button type="submit"  name="sign_up"  class="btn btn-primary">Submit</button>
 		</div>
     </form>
@@ -146,7 +136,8 @@ else{
     
  </section>
     
-    
+    </div><!--row-->
+</div><!--Container-->
     
     <!--
 	<script src="js/jquery.min.js"></script>
@@ -158,82 +149,82 @@ else{
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 	
 	
-	
-	
 	<script>
-	
-		
-	$(document).ready(function(){
+$(document).ready(function(){
 
+			//validate the length
 	$('#password').keyup(function() {
 		var pswd = $('#password').val();
-		
-		
-		
-		//validate the length
 		if ( pswd.length < 7 ) {
 			$('#password').addClass('is-invalid');
-			
-			$('#password').after('<span class="is-invalid">Password must be at least 8 characters long</span>');7
+			/*$('.hide').removeClass('invisible');*/
+			$('#password').after('<span class="is-invalid">Password must be at least 8 characters long</span>');
 			$('button').addClass('disabled');
+			$('#password').next().next().remove();
 		} 
 		if(pswd.length > 7){
 			$('#password').removeClass('is-invalid').addClass('is-valid');
+			/*$('.hide').addClass('invisible');*/
+			$('#password').next().remove();
 			$('button').removeClass('disabled');
 		}
 		
-		
-});		
+		});
 		
 	//confirm passord
 	$('#cnf_password').keyup(function(){
-		
+		var pswd = $('#password').val();
 		var cnf_pswd = $('#cnf_password').val();
 		
-	
+	if(cnf_pswd.length < 8){
+		$('#cnf_password').addClass('is-invalid');
+			
+			$('#cnf_password').after('<span class="is-invalid">Password must be at least 8 characters long</span>');
+			$('button').addClass('disabled');
+			$('#cnf_password').next().next().remove();
+	}
+	else{
+		
 		if(pswd !== cnf_pswd){
-		$("#cnf_password").addClass("is-invalid");	
-		/*$('#cnf_password').after('<span class="is-invalid">Password is not macthing</span>');*/
-		$('button').addClass('disabled');
+			$('#cnf_password').addClass('is-invalid');
+			$('#cnf_password').after('<span class="is-invalid">Password entered are not matching   </span>');
+			$('button').addClass('disabled');
+			$('#cnf_password').next().next().remove();
 			
 		}
 		 if(pswd == cnf_pswd){
-			$("#cnf_password").removeClass('span.is-invalid').addClass("is-valid");
+			$('#cnf_password').removeClass('is-invalid').addClass('is-valid');
+			$('#cnf_password').next().remove();
 			$('button').removeClass('disabled');
 		}
-	});	
+	
+		
+	}
 		
 		
-	 $("select.user_role").keyup(function(){
-        var user_role = $(".user_role option:selected").val();
+	});		
 
-     	if(user_role == "student"){
-			$('#roll_no').removeClass("sr-only");
-		}
-    });
+
+});
+	
+/*	$(document).ready(function(){
+	$("#Roll_no").keyup(funtion(){
+		var roll_no = $("#Roll_no").val();
 		
-	$(".roll_no").keyup(funtion(){
-		var roll_no = $(".roll_no").val();
-		
-		if((roll_no >501600 && roll_no <501700)){
-			$('.roll_no').addClass("is-valid");
+		if((roll_no >0 && roll_no <100)){
+			$('#Roll_no').addClass("is-valid");
 			$('button').removeClass('disabled');
 		}
 		else{
-			$('.roll_no').addClass("is-invalid");
+			$('#Roll_no').addClass("is-invalid");
 			$('button').addClass('disabled');
 		}
-						 
-						 
-	});	
-	
-	
-});	
-	
+				
+		});				 
+	});
+	*/
 	
 	</script>
-	
-
 
 </body>
 </html>

@@ -68,7 +68,7 @@
 		</ul>
 		<ul class="navbar-nav  ml-auto">
 				<li class="nav-item"><a class="nav-link " href="signup.php"><span class="fa fa-user mr-1"></span> Sign Up</a></li>
-				<li class="nav-item"><a class="nav-link" href="#"><span class="fa fa-sign-in mr-1"></span> Login</a></li>	
+				<li class="nav-item"><a class="nav-link" href="login.php"><span class="fa fa-sign-in mr-1"></span> Login</a></li>	
 		</ul>
 	</div>
 	</div>
