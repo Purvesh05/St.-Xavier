@@ -23,6 +23,7 @@ if(isset($_POST['sign_up'])){
 $firstname = $_POST['firstname'];
 $lastname = $_POST['lastname'];
 $email = $_POST['email'];
+$std = $_POST['std'];
 $roll_no = $_POST['roll_no'];	
 $user_role = $_POST['user_role'];
 $password = $_POST['password'];
@@ -32,10 +33,11 @@ $email = string_check($email);
 $roll_no = string_check($roll_no);	
 $user_role = string_check($user_role);
 $password = string_check($password);
+$std = string_check($std);
 
 $password = password_hash($password,PASSWORD_BCRYPT,array('cost'=>10));	
 
-$query = "insert into users(user_firstname,user_lastname,user_email,roll_no,user_role,user_password) values('$firstname','$lastname','$email','$roll_no','$user_role','$password')";
+$query = "insert into users(user_firstname,user_lastname,user_email,roll_no,user_role,user_password,std) values('$firstname','$lastname','$email','$roll_no','$user_role','$password',$std)";
 $create_user_query = mysqli_query($conn,$query);
 if($create_user_query){
 	header("Location: signup.php");
@@ -105,6 +107,11 @@ else{
 			<option value="user">Others</option>
 
 		</select>
+		</div>
+		
+		<div class="form-group ">
+			<label for="std">Std <span class="text-muted">For students only</span></label>
+			<input type="text" name="std" id="std" class="form-control roll_no" >
 		</div>
 		
 		<div class="form-group " id="roll_no" >
@@ -207,7 +214,7 @@ $(document).ready(function(){
 
 });
 	
-/*	$(document).ready(function(){
+	/*$(document).ready(function(){
 	$("#Roll_no").keyup(funtion(){
 		var roll_no = $("#Roll_no").val();
 		

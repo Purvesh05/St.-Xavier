@@ -42,15 +42,20 @@ $count = mysqli_num_rows($select_rollno_query);
 if($count == 1){
 	$row = mysqli_fetch_array($select_rollno_query);
 	$db_password = $row['user_password'];
-/*	echo $db_password."<br>";*/
+	 $std = $row['Std'];
 	$password = crypt($password,$db_password);
 	$password = substr($password,0,50);
-	/*echo $password."<br>";*/
+	
 	
 		if($password == $db_password){
 			
 			echo"<br> password";
 			header("Location:index.php");
+			session_start();
+			$_SESSION['roll_no'] = $roll_no;
+			$_SESSION['std'] = $std;
+		
+			
 		}
 		else{
 			echo"<br>invalid password";
